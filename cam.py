@@ -41,6 +41,8 @@ class CAM(object):
             self.model = model.Resnet_for_CAM()
         elif self.model_type == 'googlenet':
             self.model = model.Googlenet_for_CAM()
+        elif self.model_type == 'g':
+            self.model = model.G_for_CAM()
         else:
             raise Exception("'model_type' should in one of the ['vgg','resnet','googlenet']")
             
@@ -67,10 +69,10 @@ class CAM(object):
             self.model.eval()
         else:
             # batchnorm to eval mode, and dropout to train mode
-            self.model.train()
+            self.model.eval()
             for name, module in self.model._modules.items():
-                if name == 'features_conv':
-                    module.eval()
+                if name == 'classifier':
+                    module.train()
 
         # get the gradient of the output with respect to the parameters of the model
         score = self.model(input) 
