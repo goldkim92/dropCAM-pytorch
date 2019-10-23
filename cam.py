@@ -41,6 +41,8 @@ class CAM(object):
             self.model = model.Resnet_for_CAM()
         elif self.model_type == 'googlenet':
             self.model = model.Googlenet_for_CAM()
+        elif self.model_type == 'alexnet':
+            self.model = model.Alexnet_for_CAM()
         elif self.model_type == 'g':
             self.model = model.G_for_CAM()
         else:
