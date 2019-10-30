@@ -10,7 +10,7 @@ class VGG_for_CAM(nn.Module):
     def __init__(self):
         super(VGG_for_CAM, self).__init__()
         
-        # get the pretrained VGG19 network
+        # get the pretrained VGG network
         self.model = vgg16_bn(pretrained=True)
         
         # disect the network to access its last convolutional layer

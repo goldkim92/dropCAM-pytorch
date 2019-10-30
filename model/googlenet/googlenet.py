@@ -60,7 +60,7 @@ class Googlenet_for_CAM(nn.Module):
         return self.features
 
     def load_pretrained_model(self):
-        ckpt_path = join('model', 'checkpoint_epoch90.pth.tar')
+        ckpt_path = join('model', 'googlenet', 'checkpoint_epoch109.pth.tar')
 #         ckpt_path = join('model','googlenet_drop.pth')
 #         ckpt_path = join('model', 'new_googlenet.pth')
         file_id = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'

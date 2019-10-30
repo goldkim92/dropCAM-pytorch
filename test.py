@@ -36,6 +36,8 @@ if args.method == 'vanilla':
     args.runs_dir = join('runs', args.runs_dir, f'{args.th1}')
 elif args.method == 'ours':
     args.runs_dir = join('runs', args.runs_dir, f'{args.th1}_{args.th2}')
+elif args.method == 'ours_mean':
+    args.runs_dir = join('runs', args.runs_dir, f'{args.th1}_mean')
 else:
     raise Exception("'method' must be either 'vanilla' or 'ours'")
 
@@ -91,6 +93,11 @@ if __name__ == "__main__":
         elif args.method == 'ours':
             ''' CAM propose version '''
             _, _, _, _, _, bbox_pred = map.get_values(data_idx, target, th1=args.th1, th2=args.th2, mc=20, phase='train')
+        elif args.method == 'ours_mean':
+            _, heatmap_mean, _, _, _, _ = map.get_values(data_idx, target, th1=args.th1, th2=args.th2, mc=20, phase='train')
+            boolmap_mean = util.heatmap2boolmap(heatmap_mean, a=args.th1)
+            boolmap_biggest = util.get_biggest_component(boolmap_mean)
+            bbox_pred = util.boolmap2bbox(boolmap_biggest)
 
         ''' get iou '''
         iou = []
